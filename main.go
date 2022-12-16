@@ -1,19 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
-	"os"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	port := ":" + os.Getenv("PORT")
-	if os.Getenv("PORT") == "" {
-		port = ":8080"
-	}
-	fmt.Printf("Listening on port: %v", port)
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello from go and docker!")
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "pong",
+		})
 	})
-	fmt.Println(http.ListenAndServe(port, nil))
+	r.Run()
 }
