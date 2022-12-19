@@ -14,4 +14,6 @@ INSECURE="true"</code></pre>
 <li>https://signoz.io/blog/opentelemetry-gin/</li>
 <li>https://nitin-rohidas.medium.com/using-custom-span-attributes-in-opentelemetry-21e1ac33ec4c</li>
 <li>https://github.com/open-telemetry/opentelemetry-go/blob/main/example/jaeger/main.go</li>
+<li>https://medium.com/jaegertracing/jaeger-tracing-a-friendly-guide-for-beginners-7b53a4a568ca</li>
+<li>https://dev.to/aurelievache/learning-go-by-examples-part-10-instrument-your-go-app-with-opentelemetry-and-send-traces-to-jaeger-distributed-tracing-1p4a</li>
 </ul>
