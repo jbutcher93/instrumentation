@@ -6,7 +6,7 @@ COPY go.sum ./
 COPY go.mod ./
 COPY *.go ./
 RUN go mod download
-RUN go get github.com/gin-gonic/gin
+# RUN go get github.com/gin-gonic/gin
 RUN go build -o ./src
 
 EXPOSE 8080
