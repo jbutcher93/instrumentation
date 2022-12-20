@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
@@ -56,21 +55,9 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-
 		// Register our TracerProvider as the global so any imported
 		// instrumentation in the future will default to using it.
 		otel.SetTracerProvider(tp)
-
-		// Cleanly shutdown and flush telemetry when the application exits.
-		defer func(ctx context.Context) {
-			// Do not make the application hang when it is shutdown.
-			ctx, cancel = context.WithTimeout(ctx, time.Second*5)
-			defer cancel()
-			if err := tp.Shutdown(ctx); err != nil {
-				log.Fatal(err)
-			}
-		}(ctx)
-
 		tr := tp.Tracer("component-main")
 		_, span = tr.Start(ctx, "main")
 		defer span.End()
