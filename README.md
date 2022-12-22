@@ -9,6 +9,7 @@ It is comprised of a simple development environment built using Docker and Tilt.
 <li>https://signoz.io/blog/opentelemetry-gin/</li>
 <li>https://opentelemetry.io/docs/reference/specification/trace/api/</li>
   <li>https://opentelemetry.io/docs/instrumentation/go/getting-started/</li>
+  <li>https://www.honeycomb.io/blog/from-0-to-insight-with-opentelemetry-in-go</li>
 <li>https://nitin-rohidas.medium.com/using-custom-span-attributes-in-opentelemetry-21e1ac33ec4c</li>
 <li>https://github.com/open-telemetry/opentelemetry-go/blob/main/example/jaeger/main.go</li>
 <li>https://medium.com/jaegertracing/jaeger-tracing-a-friendly-guide-for-beginners-7b53a4a568ca</li>
