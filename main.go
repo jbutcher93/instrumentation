@@ -82,7 +82,8 @@ func subtract(ctx context.Context, num1, num2 int) int {
 }
 
 func result(c *gin.Context) {
-	newCtx, span := otel.Tracer("main").Start(c, "result")
+	ctx := c.Request.Context()
+	newCtx, span := otel.Tracer("main").Start(ctx, "result")
 	defer span.End()
 	result1 := add(newCtx, 2, 2)
 	result2 := subtract(newCtx, result1, 2)
