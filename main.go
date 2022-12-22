@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
@@ -64,11 +63,28 @@ func main() {
 	}
 	r := gin.Default()
 	r.Use(otelgin.Middleware(serviceName))
-
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	r.GET("/ping", result)
 	r.Run()
+}
+
+func add(ctx context.Context, num1, num2 int) int {
+	_, span := otel.Tracer("main").Start(ctx, "add")
+	defer span.End()
+	return num1 + num2
+}
+
+func subtract(ctx context.Context, num1, num2 int) int {
+	result := num1 - num2
+	_, span := otel.Tracer("main").Start(ctx, "subtract")
+	span.SetAttributes(attribute.Int("Result: ", result))
+	defer span.End()
+	return result
+}
+
+func result(c *gin.Context) {
+	newCtx, span := otel.Tracer("main").Start(c, "result")
+	defer span.End()
+	result1 := add(newCtx, 2, 2)
+	result2 := subtract(newCtx, result1, 2)
+	c.JSON(200, result2)
 }
